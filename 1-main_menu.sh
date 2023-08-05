@@ -1,39 +1,38 @@
 #!/bin/bash
+shopt -s extglob
 
 echo "######################################"
 echo "##### Welcome to DBMS Using Bash #####"
 echo "##### Developed by 'Zyad Tawfik' #####"
 echo "######################################"
 
-path=$(dirname $0)
-PS3='Please enter your choice > '
+export dirpath=$(dirname $0)
+export PS3='Please enter your choice (press enter to view the menu) > '
 
 # Check if DBMS folder exists or not
-if ! [[ -d "${path}/DBMS/" ]]; then
-    mkdir -p ${path}/DBMS/
+if ! [[ -d "${dirpath}/DBMS/" ]]; then
+    mkdir -p ${dirpath}/DBMS/
     echo -e "DBMS Directory has been created in the following path \n${path}/DBMS"
 fi
 
+cd ${dirpath}/DBMS/
+pwd
 # Show Main Menu and wait for an input
 choices=("Create DB" "List DBs" "Connect To DB" "Drop DB" "Quit")
 while true
 do
     select choice in "${choices[@]}"
     do
-        echo $choice
-        echo $REPLY
         case $REPLY in 
-            1) echo "this is option 1"
-            #source ${path}/2-create_db.sh 
+            1) source ${dirpath}/2-create_db.sh 
             ;;
-            2) echo "this is option 2"
-            #source ${path}/3-create_db.sh 
+            2) source ${dirpath}/3-list_db.sh 
             ;;
-            3) echo "this is option 3"
-            #source ${path}/4-create_db.sh 
+            3) source ${dirpath}/3-list_db.sh   # list current DBs first
+            source ${dirpath}/4-connect_db.sh 
             ;;
-            4) echo "this is option 4"
-            #source ${path}/5-create_db.sh 
+            4) source ${dirpath}/3-list_db.sh   # list current DBs first
+            source ${dirpath}/5-drop_db.sh
             ;;
             5) break 2
             ;;
