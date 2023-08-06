@@ -12,7 +12,7 @@ while true; do
 
     # Validate dbname format
     if ! [[ "$dbname" =~ ^[a-zA-Z][a-zA-Z0-9_]{1,64}$ ]]; then
-        echo "Invalid database name format. Please provide a name that follows MySQL naming convention or type exit to break."
+        echo "Invalid database name format. Please provide a name that follows SQL naming convention or type exit to break."
         continue
     fi
 

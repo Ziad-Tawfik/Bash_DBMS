@@ -1,10 +1,10 @@
 #!/bin/bash
 
-echo "List of current DBs"
+echo -e "\nList of current DBs"
 echo "##################"
 if [[ $(ls | wc -l) -gt 0 ]]; then
     echo "$(ls)"
 else
-    echo "No Databases exist, please create one"
+    echo "\nNo Databases exist, please create one"
 fi
-echo "##################"
+echo -e "##################\n"

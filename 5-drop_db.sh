@@ -12,7 +12,7 @@ while true; do
 
     # Confirm that user really wants to delete the db
     if [[ -d ${dbname} ]]; then
-        read -p "Are you sure You Want To Delete ${dbname} ? (Y/N) : " choice
+        read -rp "Are you sure You Want To Delete ${dbname} ? (Y/N) : " choice
         case $choice in
                 @([yY]) ) rm -r ${dbname}
                 echo "${dbname} DB has been deleted successfully, going back to main menu"
