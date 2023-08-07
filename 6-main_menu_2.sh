@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo "################################"
-echo "##### Connected to ${dbname} DB #####"
+echo "Connected to ${dbname} DB"
 echo "################################"
 
 export oldps3=${PS3}
@@ -17,12 +17,10 @@ do
     case $REPLY in 
         1) source ${dirpath}/7-create_tbl.sh 
         ;;
-        2) echo this is option 2 
-        #source ${dirpath}/8-list_tbl.sh 
+        2) source ${dirpath}/8-list_tbl.sh 
         ;;
-        3) echo this is option 3 
-        # source ${dirpath}/8-list_tbl.sh
-        # source ${dirpath}/9-drop_tbl.sh
+        3) source ${dirpath}/8-list_tbl.sh
+        source ${dirpath}/9-drop_tbl.sh
         ;;
         4) echo this is option 4 
         #source ${dirpath}/9-insert_tbl.sh

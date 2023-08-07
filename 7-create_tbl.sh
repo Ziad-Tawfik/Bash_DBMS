@@ -30,7 +30,7 @@ while true; do
     meta_file=".${tablename}.meta"
 
     echo "column_name;data_type;pk" > ${meta_file}
-    echo "Table '$tablename' created successfully in database '$dbname'."
+    echo "Table '${tablename}' created successfully in database '${dbname}'."
     break
 done
 
@@ -50,7 +50,7 @@ done
 # Check columns and data type
 # Prompt the user for column details
 pk_flag=false
-for ((i=1; i<=num_columns; i++)); do
+for (( i=1; i<=num_columns; i++ )); do
 
   # check column name and store it in meta table
   while true; do
@@ -73,7 +73,7 @@ for ((i=1; i<=num_columns; i++)); do
 
   # check column data type and store it in meta table
   while true; do
-    read -rp "Enter the data type (int/str) for Column ${i}, '${col_name}': " data_type_raw
+    read -rp "Enter the data type (int/str) for Column ${i}, '${col_name}': " data_type
     
     # Validate the data type
     if [[ "${data_type}" =~ ^[iI][nN][tT]$ ]]; then
@@ -117,3 +117,25 @@ for ((i=1; i<=num_columns; i++)); do
   fi
 
 done
+
+# Check if the column name is repeated or not and add suffix to it
+awk -F ";" '{
+              col = $1;
+              if (seen[col] == "") 
+              {
+                seen[col] = 1;
+              } 
+              else 
+              {
+                suffix = seen[col]++;
+                $1 = col "_" suffix;
+              }
+              printf $1;
+              for (i = 2; i <= NF; i++) 
+              {
+                printf ";%s", $i;
+              }
+              printf "\n";
+            }' "${meta_file}" > temp_file
+
+mv temp_file "${meta_file}"
