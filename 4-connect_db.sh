@@ -20,6 +20,7 @@ while true; do
         echo "chkpoint 2 in script 4 :: $(pwd)"
         cd ${dirpath}/DBMS
         echo "chkpoint 3 in script 4 :: $(pwd)"
+        break
     else
         echo "${dbname} doesn't exist"
         source ${dirpath}/3-list_db.sh

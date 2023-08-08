@@ -12,9 +12,17 @@ echo $(pwd)
 tbl_choices=("Create Table" "List Tables" "Drop Table" "Insert Into Table" \
 "Select From Table" "Delete From Table" "Update Table" "Quit")
 
-select choice in "${tbl_choices[@]}"
-do
-    case $REPLY in 
+while true; do
+    echo "1- Create Table"
+    echo "2- List Tables"
+    echo "3- Drop Table"
+    echo "4- Insert Into Table"
+    echo "5- Select From Table"
+    echo "6- Delete From Table"
+    echo "7- Update Table"
+    echo "8- Quit"
+    read -rp "Please enter you choice: " choice
+    case $choice in 
         1) source ${dirpath}/7-create_tbl.sh 
         ;;
         2) source ${dirpath}/8-list_tbl.sh 
@@ -22,17 +30,17 @@ do
         3) source ${dirpath}/8-list_tbl.sh
         source ${dirpath}/9-drop_tbl.sh
         ;;
-        4) echo this is option 4 
-        #source ${dirpath}/9-insert_tbl.sh
+        4) source ${dirpath}/8-list_tbl.sh
+        source ${dirpath}/10-insert_tbl.sh
         ;;
         5) echo this is option 5
-        # source ${dirpath}/10-select_tbl.sh
+        # source ${dirpath}/11-select_tbl.sh
         ;;
         6) echo this is option 6
-        # source ${dirpath}/11-delete_tbl.sh
+        # source ${dirpath}/12-delete_tbl.sh
         ;;
         7) echo this is option 7
-        # source ${dirpath}/12-update_tbl.sh
+        # source ${dirpath}/13-update_tbl.sh
         ;;
         8) export PS3=${oldps3}
         break

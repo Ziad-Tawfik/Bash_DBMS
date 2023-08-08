@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo -e "\nList of current DBs"
-echo "##################"
+echo -e "##################\n"
 if [[ $(ls | wc -l) -gt 0 ]]; then
     echo "$(ls)"
 else

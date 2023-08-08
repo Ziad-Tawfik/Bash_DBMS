@@ -14,16 +14,16 @@ while true; do
     if [[ -f ${tblname} ]]; then
         read -rp "Are you sure You Want To Drop the whole table ${tblname} ? (Y/N) : " choice
         case $choice in
-                @([yY]) ) rm ${tblname} .${tblname}.meta
-                echo "${tblname} table and .${tblname}.meta have been deleted successfully, going back to main menu"
-                break
-                ;;
-                @([nN]) ) echo "Operation cancelled, going back to main menu"
-                break
-                ;;
-                *) echo "Invalid option"
-                continue
-                ;;
+            @([yY])) rm ${tblname} .${tblname}.meta
+            echo "${tblname} table and .${tblname}.meta have been deleted successfully, going back to main menu"
+            break
+            ;;
+            @([nN])) echo "Operation cancelled, going back to main menu"
+            break
+            ;;
+            *) echo "Invalid option"
+            continue
+            ;;
         esac
     else
         echo "${tblname} doesn't exist"

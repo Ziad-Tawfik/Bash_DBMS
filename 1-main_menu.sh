@@ -18,11 +18,15 @@ fi
 cd ${dirpath}/DBMS/
 pwd
 # Show Main Menu and wait for an input
-choices=("Create DB" "List DBs" "Connect To DB" "Drop DB" "Quit")
-select choice in "${choices[@]}"
-do
-    case $REPLY in 
-        1) source ${dirpath}/2-create_db.sh 
+while true; do
+    echo "1- Create DB"
+    echo "2- List DBs"
+    echo "3- Connect to DB"
+    echo "4- Drop DB"
+    echo "5- Quit"
+    read -rp "Please enter you choice: " choice
+    case $choice in 
+        1) source ${dirpath}/2-create_db.sh
         ;;
         2) source ${dirpath}/3-list_db.sh 
         ;;

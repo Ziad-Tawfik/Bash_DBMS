@@ -1,7 +1,7 @@
 #!/bin/bash
 
 while true; do
-    # Take input from user for db name
+    # Take input from user for table name
     read -rp "Please enter the table name: " tablename
 
     # Validate the input length
@@ -29,7 +29,7 @@ while true; do
     # alias the meta file name
     meta_file=".${tablename}.meta"
 
-    echo "column_name;data_type;pk" > ${meta_file}
+    echo "column_name:data_type:pk" > ${meta_file}
     echo "Table '${tablename}' created successfully in database '${dbname}'."
     break
 done
@@ -67,7 +67,7 @@ for (( i=1; i<=num_columns; i++ )); do
       continue
     fi
 
-    echo -ne "${col_name};" >> ${meta_file}
+    echo -ne "${col_name}:" >> ${meta_file}
     break
   done
 
@@ -77,10 +77,10 @@ for (( i=1; i<=num_columns; i++ )); do
     
     # Validate the data type
     if [[ "${data_type}" =~ ^[iI][nN][tT]$ ]]; then
-      echo -ne "int;" >> ${meta_file}
+      echo -ne "int:" >> ${meta_file}
       break
     elif [[ "${data_type}" =~ ^[sS][tT][rR]$ ]]; then
-      echo -ne "str;" >> ${meta_file}
+      echo -ne "str:" >> ${meta_file}
       break
     else
       echo "Error: Invalid data type. Allowed types are 'int' and 'str'."
@@ -119,23 +119,20 @@ for (( i=1; i<=num_columns; i++ )); do
 done
 
 # Check if the column name is repeated or not and add suffix to it
-awk -F ";" '{
-              col = $1;
-              if (seen[col] == "") 
-              {
-                seen[col] = 1;
-              } 
-              else 
-              {
-                suffix = seen[col]++;
-                $1 = col "_" suffix;
-              }
-              printf $1;
-              for (i = 2; i <= NF; i++) 
-              {
-                printf ";%s", $i;
-              }
-              printf "\n";
-            }' "${meta_file}" > temp_file
+awk -F ":" '{
+    col = $1;
+    if (seen[col] == "") {
+      seen[col] = 1;
+    } 
+    else {
+      suffix = seen[col]++;
+      $1 = col "_" suffix;
+    }
+    printf $1;
+    for (i = 2; i <= NF; i++) {
+      printf ":%s", $i;
+    }
+    printf "\n";
+  }' "${meta_file}" > temp_file
 
 mv temp_file "${meta_file}"
