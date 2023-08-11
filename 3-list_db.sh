@@ -1,10 +1,13 @@
 #!/bin/bash
-
+tput setaf 3 md
 echo -e "\nList of current DBs"
-echo -e "##################\n"
+echo -e "##################"
 if [[ $(ls | wc -l) -gt 0 ]]; then
+    tput setaf 2 md
     echo "$(ls)"
 else
-    echo -e "\nNo Databases exist, please create one"
+    tput setaf 1 md
+    echo -e "No Databases exist, please create one"
 fi
-echo -e "\n##################\n"
+tput setaf 3 md
+echo -e "##################"

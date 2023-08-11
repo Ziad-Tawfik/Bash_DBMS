@@ -1,17 +1,18 @@
 #!/bin/bash
+select test in "a" "b"; do
+  case $test in
+    "a")
+      echo "this is one"
+      vagrant up
+      ;;
 
-case "$1" in
-  start | up)
-    echo "this is one"
-    vagrant up
-    ;;
+      "b") echo $test":"
+      ;;
 
-    2) echo "this is 2"
-    ;;
+      "c") ;;
 
-    3) ;;
-
-  *)
-    echo "Usage: $0 {start|stop|ssh}"
-    ;;
-esac
+    *)
+      echo "Usage: $0 {start|stop|ssh}"
+      ;;
+  esac
+done

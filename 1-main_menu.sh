@@ -1,6 +1,9 @@
 #!/bin/bash
 shopt -s extglob
 
+clear
+tput setab 0 md
+tput setaf 1 md
 echo "######################################"
 echo "##### Welcome to DBMS Using Bash #####"
 echo "##### Developed by 'Zyad Tawfik' #####"
@@ -15,31 +18,47 @@ if ! [[ -d "${dirpath}/DBMS/" ]]; then
     echo -e "DBMS Directory has been created in the following path \n${path}/DBMS"
 fi
 
+tput setaf 2 md
 cd ${dirpath}/DBMS/
-pwd
+echo "Current DBMS directory: $(pwd)"
+echo "######################################"
+
 # Show Main Menu and wait for an input
 while true; do
+    tput setaf 1 md
+    echo -e "\n"
+    echo "DB Main Menu:"
+    tput setaf 7 md
     echo "1- Create DB"
     echo "2- List DBs"
     echo "3- Connect to DB"
     echo "4- Drop DB"
     echo "5- Quit"
+    tput setaf 1 md
     read -rp "Please enter you choice: " choice
     case $choice in 
-        1) source ${dirpath}/2-create_db.sh
+        1) clear
+        tput setaf 3 md
+        source ${dirpath}/2-create_db.sh
         ;;
-        2) source ${dirpath}/3-list_db.sh 
+        2) clear
+        tput setaf 3 md 
+        source ${dirpath}/3-list_db.sh 
         ;;
-        3) echo "chkpoint 1 in script 1 :: $(pwd)"
+        3) clear
+        tput setaf 3 md
         source ${dirpath}/3-list_db.sh   # list current DBs first
         source ${dirpath}/4-connect_db.sh 
         ;;
-        4) source ${dirpath}/3-list_db.sh   # list current DBs first
+        4) clear
+        tput setaf 3 md
+        source ${dirpath}/3-list_db.sh   # list current DBs first
         source ${dirpath}/5-drop_db.sh
         ;;
         5) break
         ;;
-        *) echo "Invalid input, please choose from 1 to 5" 
+        *) tput setaf 1 md
+        echo "Invalid input, please choose from 1 to 5" 
         ;;
     esac
 done

@@ -1,5 +1,6 @@
 #!/bin/bash
 
+tput setaf 2 md
 echo "################################"
 echo "Connected to ${dbname} DB"
 echo "################################"
@@ -7,12 +8,16 @@ echo "################################"
 export oldps3=${PS3}
 export PS3="Connected to db '${dbname}', >> "
 
-echo $(pwd)
+
 # Show Main Menu and wait for an input
 tbl_choices=("Create Table" "List Tables" "Drop Table" "Insert Into Table" \
 "Select From Table" "Delete From Table" "Update Table" "Quit")
 
 while true; do
+    tput setaf 1 md
+    echo -e "\n"
+    echo "Table Main Menu"
+    tput setaf 7 md
     echo "1- Create Table"
     echo "2- List Tables"
     echo "3- Drop Table"
@@ -21,31 +26,47 @@ while true; do
     echo "6- Delete From Table"
     echo "7- Update Table"
     echo "8- Quit"
+    tput setaf 1 md
     read -rp "Please enter you choice: " choice
-    case $choice in 
-        1) source ${dirpath}/7-create_tbl.sh 
+    case ${choice} in 
+        1) clear
+        tput setaf 3 md
+        source ${dirpath}/7-create_tbl.sh 
         ;;
-        2) source ${dirpath}/8-list_tbl.sh 
+        2) clear
+        tput setaf 3 md
+        source ${dirpath}/8-list_tbl.sh 
         ;;
-        3) source ${dirpath}/8-list_tbl.sh
+        3) clear
+        source ${dirpath}/8-list_tbl.sh
+        tput setaf 3 md
         source ${dirpath}/9-drop_tbl.sh
         ;;
-        4) source ${dirpath}/8-list_tbl.sh
+        4) clear
+        source ${dirpath}/8-list_tbl.sh
+        tput setaf 3 md
         source ${dirpath}/10-insert_tbl.sh
         ;;
-        5) echo this is option 5
-        # source ${dirpath}/11-select_tbl.sh
+        5) clear
+        source ${dirpath}/8-list_tbl.sh
+        tput setaf 3 md
+        source ${dirpath}/11-select_tbl.sh
         ;;
-        6) echo this is option 6
-        # source ${dirpath}/12-delete_tbl.sh
+        6) clear
+        source ${dirpath}/8-list_tbl.sh
+        tput setaf 3 md
+        source ${dirpath}/12-delete_tbl.sh
         ;;
-        7) echo this is option 7
-        # source ${dirpath}/13-update_tbl.sh
+        7) clear
+        source ${dirpath}/8-list_tbl.sh
+        tput setaf 3 md
+        source ${dirpath}/13-update_tbl.sh
         ;;
         8) export PS3=${oldps3}
         break
         ;;
-        *) echo "Invalid input, please choose from 1 to 8" 
+        *) tput setaf 1 md
+        echo "Invalid input, please choose from 1 to 8" 
         ;;
     esac
 done
