@@ -19,7 +19,7 @@
 
 ## To start DBMS-Project
 
-1. navigate to the directory DBMS-Project
+1. navigate to the directory Bash_DBMS
 2. make sure the files has the execute premission by typing `ls -l`
 3. if they don't have execute permission run `chmod u+x .`
 4. run the main_menu.sh: `source 1-main_menu.sh`
