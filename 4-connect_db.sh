@@ -18,8 +18,8 @@ while true; do
         tput setaf 2 md
         clear
         cd ${dbname}
-        source ${dirpath}/6-main_menu_2.sh ${dbname}
-        cd ${dirpath}/DBMS
+        source ../../6-main_menu_2.sh ${dbname}
+        cd ..
         clear
         break
     else

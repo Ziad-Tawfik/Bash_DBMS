@@ -39,21 +39,21 @@ while true; do
     case $choice in 
         1) clear
         tput setaf 3 md
-        source ${dirpath}/2-create_db.sh
+        source ../2-create_db.sh
         ;;
         2) clear
         tput setaf 3 md 
-        source ${dirpath}/3-list_db.sh 
+        source ../3-list_db.sh 
         ;;
         3) clear
         tput setaf 3 md
-        source ${dirpath}/3-list_db.sh   # list current DBs first
-        source ${dirpath}/4-connect_db.sh 
+        source ../3-list_db.sh   # list current DBs first
+        source ../4-connect_db.sh 
         ;;
         4) clear
         tput setaf 3 md
-        source ${dirpath}/3-list_db.sh   # list current DBs first
-        source ${dirpath}/5-drop_db.sh
+        source ../3-list_db.sh   # list current DBs first
+        source ../5-drop_db.sh
         ;;
         5) break
         ;;
