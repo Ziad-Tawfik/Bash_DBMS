@@ -22,9 +22,16 @@ done
 
 # Get all column names and add it as a header to the file
 oldifs="$IFS"
-IFS=","
+IFS=":"
 col=$(cut -d : -f 1 ${meta_file} | sed -n '2,$p')
 readarray -t col_arr <<< "${col}"
+
+tput setaf 7 md
+echo "###########################"
+tput setaf 2 md
+echo "$(echo "${col_arr[*]}" | cat - ${tablename} | column -t -s :)"
+tput setaf 7 md
+echo "###########################"
 
 while true; do
     # Print column names
@@ -65,11 +72,12 @@ while true; do
 
     # Receive input from user for row no. & check pk found or not
     tput setaf 3 md
-    read -rp "Please enter the pk value for the row you want to update it: " row_no
     pk_column_no=$(($(cut -d : -f3 ${meta_file} | egrep -in yes | cut -d : -f1) - 1))
     pk_values=$(cut -d : -f ${pk_column_no} ${tablename})
+    pk_column_name=$(tail -n +2 ${meta_file} | cut -d : -f 1 | sed -n "${pk_column_no} p")
+    read -rp "Please enter the pk value '${pk_column_name}' for the row you want to update it: " row_no
     found=$(echo ${pk_values} | egrep -iw ^"${row_no}"$)
-
+    
     if [[ -z ${found} ]]; then
         tput setaf 1 md
         echo "Invalid pk value"
