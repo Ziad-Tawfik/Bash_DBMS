@@ -22,7 +22,8 @@ done
 
 # Get all column names and add it as a header to the file
 oldifs="$IFS"
-IFS=","
+#IFS=","
+IFS=":"
 col=$(cut -d : -f 1 ${meta_file} | sed -n '2,$p')
 readarray -t col_arr <<< "${col}"
 
@@ -39,7 +40,7 @@ while true; do
     1) tput setaf 7 md
     echo "###########################"
     tput setaf 2 md
-    echo "$(cat ${tablename} | column -t -s : -N "${col_arr[*]}")"
+    echo "$(echo "${col_arr[*]}" | cat - ${tablename} | column -t -s :)"
     tput setaf 7 md
     echo "###########################"
     ;;
@@ -56,7 +57,7 @@ while true; do
       tput setaf 7 md
       echo "###########################"
       tput setaf 2 md
-      echo "$(echo ${row} | column -t -s : -N "${col_arr[*]}")"
+      echo "$(echo -e "${col_arr[*]}\n${row}" | column -t -s :)"
       tput setaf 7 md
       echo "###########################"
     else
