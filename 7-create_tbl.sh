@@ -3,13 +3,17 @@
 while true; do
     tput setaf 3 md
     # Take input from user for table name
-    read -rp "Please enter the table name: " tablename
+    read -rp "Please enter the table name or type exit to return to main menu: " tablename
 
     # Validate the input length
     if [[ ${#tablename} -eq 0 || ${#tablename} -gt 64 ]]; then
       tput setaf 1 md
       echo "Invalid table name length. Please provide a name between 1 and 64 characters."
       continue
+    fi
+
+    if [[ "${tablename}" =~ ^[eE][xX][iI][tT]$ ]]; then
+        return 1
     fi
 
     # Validate the table name format

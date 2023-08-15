@@ -8,7 +8,7 @@ if [[ $(ls | wc -l) -gt 0 ]]; then
     echo "$(ls -1)"
 else
     tput setaf 1 md
-    echo -e "No tables exist, please create one"
+    echo -e "No tables exist, please create first"
 fi
 tput setaf 3 md
 echo -e "##################"

@@ -1,9 +1,17 @@
 #!/bin/bash
 
+if [[ $(ls | wc -l) -eq 0 ]]; then
+    return 1
+fi
+
 while true; do
     tput setaf 3 md
     # Take input from user for table name
-    read -rp "Please enter the table name you want to update data in it: " tablename
+    read -rp "Please enter the table name you want to update data in it or type exit to return to main menu: " tablename
+    
+    if [[ "${tablename}" =~ ^[eE][xX][iI][tT]$ ]]; then
+        return 1
+    fi
 
     # Check if the table file already exists
     if ! [[ -f "${tablename}" ]]; then

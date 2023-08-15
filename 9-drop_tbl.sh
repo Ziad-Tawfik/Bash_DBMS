@@ -1,15 +1,23 @@
 #!/bin/bash
 
+if [[ $(ls | wc -l) -eq 0 ]]; then
+    return 1
+fi
+
 while true; do
     tput setaf 3 md
     # Take input from user for table name
-    read -rp "Please enter the table name you want to drop: " tblname
+    read -rp "Please enter the table name you want to drop or type exit to return to main menu: " tblname
 
     # Validate that length of name is not zero 
     if [[ -z ${tblname} ]]; then
         tput setaf 1 md
         echo "Invalid table name length. Please provide a name between 1 and 64 characters."
         continue
+    fi
+
+    if [[ "${tblname}" =~ ^[eE][xX][iI][tT]$ ]]; then
+        return 1
     fi
 
     # Confirm that user really wants to delete the table

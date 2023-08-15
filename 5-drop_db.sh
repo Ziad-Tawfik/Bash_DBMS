@@ -1,15 +1,23 @@
 #!/bin/bash
 
+if [[ $(ls | wc -l) -eq 0 ]]; then
+    return 1
+fi
+
 while true; do
     tput setaf 3 md
     # Take input from user for db name
-    read -rp "Please enter the database name you want to drop: " dbname
+    read -rp "Please enter the database name you want to drop or type exit to get back to main menu: " dbname
 
     # Validate that length of name is not zero 
     if [[ -z ${dbname} ]]; then
         tput setaf 1 md
         echo "Invalid database name length. Please provide a name between 1 and 64 characters."
         continue
+    fi
+
+    if [[ "${dbname}" =~ ^[eE][xX][iI][tT]$ ]]; then
+        break
     fi
 
     # Confirm that user really wants to delete the db
