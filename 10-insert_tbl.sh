@@ -45,7 +45,7 @@ while true; do
 done
 
 # Get the number of cols
-num_columns=$(cat ${meta_file} | cut -d ":" -f 1 | wc -l)
+num_columns=$(cat ${meta_file} | cut -d ":" -f 1 | sed -n '2,$p' | wc -l)
 tput setaf 2 md
 echo "number of columns is ${num_columns}"
 
